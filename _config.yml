@@ -20,11 +20,11 @@ cusdis:
     app_id: #your cusdis app_id
 
 user:
-  name: Catbook
-  pic: /assets/img/cat.jpg
-  picAlt: "catbook"
-  job: a category-centric theme
-  aboutme: true # comment this out if you don't need the 'about' page.
+  name: 딥러닝 일기장
+  pic: /assets/img/profile_image.jpg
+  picAlt: "딥러닝 일기장"
+  job: Juniar A.I Engineer
+  aboutme: false # comment this out if you don't need the 'about' page.
 
 exclude:
   - README.md
