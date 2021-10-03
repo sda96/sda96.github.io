@@ -1,4 +1,4 @@
-I"�<h2 id="1-새로운-repository-만들기">1. 새로운 Repository 만들기</h2>
+I",<h2 id="1-새로운-repository-만들기">1. 새로운 Repository 만들기</h2>
 
 <p><img src="https://user-images.githubusercontent.com/51338268/134861587-f6c41a9f-3702-4e98-beb3-a714e081180f.png" alt="image" /></p>
 
@@ -101,7 +101,7 @@
 
 <ol>
   <li><code class="language-plaintext highlighter-rouge">bundle install</code></li>
-  <li><code class="language-plaintext highlighter-rouge">bundle exec jekyll serve</code></li>
+  <li><code class="language-plaintext highlighter-rouge">bundle exec jekyll serve</code> 또는 <code class="language-plaintext highlighter-rouge">jekyll serve</code></li>
   <li>url에 http://127.0.0.1:4000/ 검색을 하면 결과를 볼 수 있습니다.</li>
 </ol>
 
