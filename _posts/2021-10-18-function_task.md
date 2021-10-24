@@ -77,5 +77,5 @@ Many-to-Many가 주로 쓰이는 문제는 바로 '분류' 문제입니다. 위�
 
 참고사이트
 
-- https://hsm-edu.tistory.com/1197
-- https://www.youtube.com/watch?v=kYB8IZa5AuE
+- [사이트 1](https://hsm-edu.tistory.com/1197)
+- [사이트 2](https://www.youtube.com/watch?v=kYB8IZa5AuE)

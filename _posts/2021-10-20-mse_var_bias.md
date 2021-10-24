@@ -2,6 +2,7 @@
 title: MSE로부터 분산과 편향 도출하기
 categories: [math]
 comments: true
+use_math: true
 ---
 
 
@@ -93,14 +94,14 @@ $MSE$​​ 가 작아질려면 추정량의 분산이 작을수록 더 좋은 �
 
 ## 4. 참고 사이트
 
-- https://www.youtube.com/results?search_query=%ED%99%95%EB%A5%A0%EB%B3%80%EC%88%98+%ED%99%95%EB%A5%A0%EB%B6%84%ED%8F%AC
+- [유튜브 1](https://www.youtube.com/results?search_query=%ED%99%95%EB%A5%A0%EB%B3%80%EC%88%98+%ED%99%95%EB%A5%A0%EB%B6%84%ED%8F%AC)
 
-- https://www.youtube.com/watch?v=-CbVagdHqIQ
+- [유튜브 2](https://www.youtube.com/watch?v=-CbVagdHqIQ)
 
-- https://www.youtube.com/watch?v=mZwszY3kQBg
+- [유튜브 3](https://www.youtube.com/watch?v=mZwszY3kQBg)
 
-- https://cs182sp21.github.io/static/slides/lec-3.pdf
+- [강의노트](https://cs182sp21.github.io/static/slides/lec-3.pdf)
 
-- https://medium.com/mighty-data-science-bootcamp/%EC%B5%9C%EC%84%A0%EC%9D%98-%EB%AA%A8%EB%8D%B8%EC%9D%84-%EC%B0%BE%EC%95%84%EC%84%9C-%EB%B6%80%EC%A0%9C-bias%EC%99%80-variance-%EB%AC%B8%EC%A0%9C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-eccbaa9e0f50
+- [사이트 1](https://medium.com/mighty-data-science-bootcamp/%EC%B5%9C%EC%84%A0%EC%9D%98-%EB%AA%A8%EB%8D%B8%EC%9D%84-%EC%B0%BE%EC%95%84%EC%84%9C-%EB%B6%80%EC%A0%9C-bias%EC%99%80-variance-%EB%AC%B8%EC%A0%9C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-eccbaa9e0f50)
 
-- https://doublekpark.blogspot.com/2019/01/4-variance-bias-trade-off.html
+- [사이트 2](https://doublekpark.blogspot.com/2019/01/4-variance-bias-trade-off.html)
