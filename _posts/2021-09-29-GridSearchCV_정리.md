@@ -116,3 +116,11 @@ GridSearchCV는 사용자가 정의한 파이프라인과 파라미터를 기준
 
 그러므로 GridSearchCv는 사용자를 간편하게 만들어주는 도구이지만 적은 수의 데이터로 간단하게 모델의 성능을 비교하거나 파라미터에 따른 모델의 성능 비교가 필요할 때 사용하는 것이 좋다고 생각합니다.
 
+## 참고사이트
+
+- https://www.python2.net/questions-688254.htm
+- https://stackoverflow.com/questions/34848266/typeerror-if-no-scoring-is-specified-the-estimator-passed-should-have-a-score
+- https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter
+- https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html?highlight=gridsearchcv#sklearn.model_selection.GridSearchCV.score
+- [https://datascienceschool.net/03%20machine%20learning/14.01%20%EB%AA%A8%ED%98%95%20%EC%B5%9C%EC%A0%81%ED%99%94.html](https://datascienceschool.net/03 machine learning/14.01 모형 최적화.html)
+- https://scikit-learn.org/stable/modules/compose.html#pipeline
