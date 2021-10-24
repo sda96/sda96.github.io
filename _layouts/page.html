@@ -3,15 +3,17 @@
 
 {% include head.html %}
 
+
 <body>
   <div class="content">
 
     {% include header.html %}
-
-    {% include mobile_menu.html %}
     {% if page.use_math %}
       {% include mathjax_support.html %}
     {% endif %}
+    {% include mobile_menu.html %}
+
+
     <main class="main">
 
     {{ content }}

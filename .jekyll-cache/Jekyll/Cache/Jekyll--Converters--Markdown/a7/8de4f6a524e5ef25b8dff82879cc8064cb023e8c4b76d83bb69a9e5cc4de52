@@ -1,4 +1,4 @@
-I"�1<p>일반적으로 데이터가 모델에 입력되어져서 원하는 출력값으로 나오는 과정을 간략하게 일반화하면 아래와 같습니다.</p>
+I"5<p>일반적으로 데이터가 모델에 입력되어져서 원하는 출력값으로 나오는 과정을 간략하게 일반화하면 아래와 같습니다.</p>
 
 <p><img src="https://user-images.githubusercontent.com/51338268/135743683-b0c6cbe3-4e4e-4e55-ae98-c3c7787ef6be.png" alt="image" /></p>
 
@@ -110,4 +110,14 @@
 
 <p>그러므로 GridSearchCv는 사용자를 간편하게 만들어주는 도구이지만 적은 수의 데이터로 간단하게 모델의 성능을 비교하거나 파라미터에 따른 모델의 성능 비교가 필요할 때 사용하는 것이 좋다고 생각합니다.</p>
 
+<h2 id="참고사이트">참고사이트</h2>
+
+<ul>
+  <li>https://www.python2.net/questions-688254.htm</li>
+  <li>https://stackoverflow.com/questions/34848266/typeerror-if-no-scoring-is-specified-the-estimator-passed-should-have-a-score</li>
+  <li>https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter</li>
+  <li>https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html?highlight=gridsearchcv#sklearn.model_selection.GridSearchCV.score</li>
+  <li><a href="https://datascienceschool.net/03 machine learning/14.01 모형 최적화.html">https://datascienceschool.net/03%20machine%20learning/14.01%20%EB%AA%A8%ED%98%95%20%EC%B5%9C%EC%A0%81%ED%99%94.html</a></li>
+  <li>https://scikit-learn.org/stable/modules/compose.html#pipeline</li>
+</ul>
 :ET
