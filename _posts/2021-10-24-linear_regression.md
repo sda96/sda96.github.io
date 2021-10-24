@@ -2,7 +2,7 @@
 title: 회귀분석 정리하기
 categories: [math]
 comments: true
-
+use_math: true
 ---
 
 
