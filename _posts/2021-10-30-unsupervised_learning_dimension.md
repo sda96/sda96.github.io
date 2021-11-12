@@ -1,6 +1,6 @@
 ---
 title: 비지도 학습 (2) 차원축소
-categories: [deeplearnng]
+categories: [deeplearning]
 comments: true
 use_math : true
 ---
