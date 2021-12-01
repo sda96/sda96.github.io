@@ -1,6 +1,6 @@
 ---
 title: Embedding layer와 RNN, LSTM layer
-categories: [math]
+categories: [deeplearning]
 comments: true
 use_math: true
 
