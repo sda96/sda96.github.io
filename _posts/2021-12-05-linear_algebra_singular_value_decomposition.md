@@ -1,0 +1,85 @@
+---
+title: 선형대수 정리 - 특이값 분해
+categories: [math]
+comments: true
+use_math: true
+---
+
+
+
+## 1. 특이값 분해
+
+- 특이값 분해는 고유값 분해와 같은 행렬을 대각화시키는 방법으로 행렬이 정방행렬이든 직사각행렬이든 관계없이 적용이 가능한 점이 특별합니다.
+
+- 실수공간에서 임의의 행렬 $A$​가 $m \times n$​ 행렬일 때, 특이값 분해가 됩니다.
+
+  $A = U\sum V^T$
+
+- $U$는 $m \times m$ 직교행렬로 left singular vector 라고 부릅니다.       
+
+  - ($AA^T = U(\sum\sum^T)U^T$​)
+  - $UU^T = E$
+
+- $V$는 $n \times n$ 직교행렬로 right singular vector 라고 부릅니다.          
+
+  - ($A^TA = V(\sum^T\sum)V^T$)
+  - $VV^T = E$
+
+- $\sum$는  $AA^T, A^TA$를 고유값 분해를 해서 나오는 고유값들의 square root를 대각원소로 하는 $m \times n$ 직사각행렬로 그 대각 원소들을 행렬 $A$의 특이값(singular value)라고 부릅니다.
+
+  - $AA^T, A^TA$는 모두 대칭행렬이므로 위와 같은 고유값 분해가 항상 가능합니다.
+  - $AA^T, A^TA$의 고유값들은 모두 0 이상(nonnegative)이며 0이 아닌 고유값들은 서로 동일합니다.
+
+- 행렬 $A$​가 선형변환을 시켜주는 함수일 때, $A_{m\times n}a_n = b_m$​ 과 식이 나오게 됩니다. 이 식의 의미는 특이행렬 $A$가 $n$차원의 벡터를 선형변환시키면  $m$차원의 벡터로 변환시켜준다는 의미입니다.
+- 행렬 $A$​의 계수는 $\sum$​​의 대각 원소 중 영이 아닌 고유값의 개수를 $r \leq min (m,n)$​​과 같으며,  이 $\sum$ 대각 원소들의 순서는 큰 값이 가장 앞에서 부터 배열되어 있습니다.
+
+
+
+## 2. 특이값 분해의 기하학적 의미
+
+[![image](https://user-images.githubusercontent.com/51338268/144754973-1f4133bd-2886-46c8-ac6f-3b3c3596e6bb.png)](https://en.wikipedia.org/wiki/Singular_value_decomposition)
+
+식 $Ax = U\sum V^{T}x$에 따르면 $U, V$는 직교행렬이고 $\sum$은 대각행렬이므로  $x$를  먼저 $V^T$에 의해 회전시킨 후 $\sum$으로 스케일을 변화시키고 다시 $U$로 회전시칸다는 것을 알 수가 있습니다.
+
+- 즉 행렬의 특이값이란 이 선형변환의 스케일 변환을 나타내는 값으로 해석이 가능합니다.
+- 고유값 분해와 비교해보면 고유값은 변환에 의해 불변인 방향벡터(고유벡터)에 대한 스케일 factor 이고 특이값은 변환 자체의 스케일 factor로 볼 수 있습니다.
+
+
+
+## 3. Reduced SVD와 행렬근사, 데이터 압축
+
+- $m \times n $ 행렬 $A$를 SVD로 분해하면 full SVD라 부릅니다. (단, $m > n$)
+
+  [![image](https://user-images.githubusercontent.com/51338268/144755219-2b3fe37e-18ed-41e7-9dfa-ac42f9770655.png)](https://darkpgmr.tistory.com/106?category=460967)
+
+- 일반적으로는 full SVD를 사용하는 경우는 적으며 동일한 의미를 가지지만 연산량을 훨씬 적은 reduced SVD를 사용합니다. ($s$ = $n$개의 singular value들 중 0이 아닌 것들의 개수가 r개로 $t < r$라고 가정합니다.)
+
+  [![image](https://user-images.githubusercontent.com/51338268/144755305-c899f99f-8c86-472b-9eb7-1eea900af905.png)](https://darkpgmr.tistory.com/106?category=460967)
+
+
+
+## 4. 특이값 분해와 pseudo inverse, 최소제곱법
+
+선형시스템 $Ax = b$가 있을 때, 행렬 $A$가 invertible하여 역행렬이 존재하면 $x = A^{-1}b$의 식으로 $x$를 간단하게 구할 수 있습니다.
+
+하지만 현실의 대부분의 문제에서는 역행렬이 존재하지 않는 non-invertible한 상황이 많이 발생하며 역행렬에 근사하는 pseudo inverse인 $A^+$를 사용하여 $x = A^+b$를 계산할 수 있는데 실제로 $x$를 구할 때는 $\vert \vert Ax - b \vert \vert$가 최소가 되는 해를 구합니다.
+
+- pesudo inverse로 해를 구하는 방식은 최소제곱법을 사용하는 것과 같습니다.
+
+- 원래 역행렬은 정방행렬에서만 정의되지만 pseudo inverse를 사용하여 직사각행렬에서도 특이값 분해로 계산이 되어집니다.
+
+- $m \times n $ 인 직사각 행렬 $A$가 존재할 때,
+
+  $A = U\sum V^{T}$​
+
+  $A^+ = V\sum U^{T}$
+
+  $AA^+ = E_n$​      $(m \geq n)$​​​
+
+  $A^+A = E_m$​     $(m \leq n)$​
+
+
+
+## 참고 사이트
+
+- https://darkpgmr.tistory.com/106?category=460967
