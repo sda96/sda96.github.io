@@ -1,0 +1,269 @@
+I"�z<h2 id="1-딥러닝-프레임-워크">1. 딥러닝 프레임 워크</h2>
+
+<p>딥러닝이라는 기술을 단순히 자체 코드로 구현을 하려면 생각보다 오랜시간이 걸립니다. 특히, 모델의 그래디언트를 수식으로 구하고 이를 바탕으로 역전파를 구현하려면 머리가 아픕니다.</p>
+
+<p>하지만 파이썬에는 딥러닝 기술을 구현시키는데 도움을 주는 다수의 프레임 워크가 존재합니다.</p>
+
+<p><a href="https://em360tech.com/top-10/machine-learning-is-deep">2021년 최고의 딥러닝 프레임 워크 Top10</a></p>
+<ol>
+  <li>Tensorflow</li>
+  <li>PyTorch</li>
+  <li>Keras</li>
+  <li>Sonnet</li>
+  <li>Caffe</li>
+  <li>Microsoft Cognitive Toolkit</li>
+  <li>MXNet</li>
+  <li>Gluon</li>
+  <li>DL4J</li>
+  <li>ONNX</li>
+</ol>
+
+<p>저희들은 이 중에서 가장 인기가 프레임 워크인 Tensorflow를 사용하겠습니다.</p>
+
+<h2 id="2-tensorflow">2. Tensorflow</h2>
+
+<p>Tensorflow를 간단하게 설명하면 구글에서 배포한 오픈소스 플랫폼으로 모든 종류의 AI개발을 지원해줍니다.</p>
+
+<h3 id="21-tensorflow-v1">2.1 Tensorflow V1</h3>
+
+<p>Tensorflow는 모델의 순전파부분만 설계를 하면 그 모델의 그래디언트(미분값)을 사전에 구해둘 수 있습니다.
+이러한 특징은 Tensorflow V1때부터 내려온 <code class="language-plaintext highlighter-rouge">Directed Acyclic Graph(DAG : 유향 비순환 그래프)</code> 덕분입니다.
+DAG 덕분에 노드와 노드를 연결하는 매 엣지마다 chain-rule을 기반으로 그래디언트가 역방향으로 전파될 수 있도록 만들어졌습니다.
+이러한 방식을 Tensorflow의 <code class="language-plaintext highlighter-rouge">Graph Mode</code> 라고 합니다.</p>
+
+<p>하지만 이러한 설계 때문에 Tensorflow V1은</p>
+<ul>
+  <li>모델을 구성하는 그래프를 그리는 과정</li>
+  <li>그래프 상에서 연산이 실제 진행되는 과정
+2가지 과정을 <code class="language-plaintext highlighter-rouge">session</code>을 통하여 엄격하게 분리하였습니다. 그래서 그래프 사이에서 벌어지는 모든 연산은 반드시 <code class="language-plaintext highlighter-rouge">session.run()</code>안에서 수행되도록 만들어졌습니다.</li>
+</ul>
+
+<p>이러한 방식이 주는 이점은</p>
+<ul>
+  <li>대규모 분산 환경에서의 확장성</li>
+  <li>대규모 분산 환경에서의 생산성</li>
+</ul>
+
+<p>단점으로는</p>
+<ul>
+  <li>코드가 길고 파이써닉하지 못함</li>
+  <li>구현 방식이 상당히 어려움</li>
+  <li>그래프를 만들고 돌려봐야 비로소 모델 구성 문제가 드러남</li>
+</ul>
+
+<h3 id="22-tensorflow-v2">2.2 Tensorflow V2</h3>
+
+<p>하지만 Tensorflow가 V2로 업그레이드되면서 많은 변화가 생겨났습니다.
+다양한 변화들중에서 대표적인 것으로</p>
+<ul>
+  <li>PyTorch의 <code class="language-plaintext highlighter-rouge">Eager Mode</code>를 수용하였습니다.
+    <ul>
+      <li>Eager Mode는 딥러닝 그래프가 다 그려지지 않아도 얼마든지 부분실행 및 오류검증이 가능합니다.</li>
+      <li>코드도 간결하고 파이써닉한 설계를 가졌습니다.</li>
+    </ul>
+  </li>
+  <li>Keras의 쉽고 간결한 머신러닝 프레임 워크를 수용하였습니다.</li>
+</ul>
+
+<p>이러한 변화들이 있었으며 추가적인 변화 내용은 다음 <a href="https://www.datasciencecentral.com/profiles/blogs/tensorflow-1-x-vs-2-x-summary-of-changes">링크</a>에서 볼 수 있습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 텐서플로 1.x
+</span><span class="n">outputs</span> <span class="o">=</span> <span class="n">session</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">placeholder</span><span class="p">),</span> <span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span><span class="n">placeholder</span><span class="p">:</span> <span class="nb">input</span><span class="p">})</span>
+<span class="c1"># 텐서플로 2.0
+</span><span class="n">outputs</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>위의 두 코드는 서로 같은 기능을 하지만 버전에 따른 차이로 Tensorflow V1과 V2의 구현 방식이 크게 간소화된 것을 알 수가 있습니다.</p>
+
+<p>직관적인 코드의 길이 말고도, Tensorflow는 Session.run()에 의존하지 않고, 그래프를 완성하지 않아도 부분 실행이 가능한 Eager Mode의 장점들인 설계, 구현, 디버깅 전과정을 간단하게 만들 수 있도록 바뀐 것을 알 수가 있었습니다.</p>
+
+<h2 id="3-tf2-api">3. TF2 API</h2>
+
+<p>딥러닝 기술을 구현할 수 있도록 Tensorflow 에서는 3가지 유형의 API를 제공하고 있습니다.</p>
+<ul>
+  <li>Sequential Model</li>
+  <li>Functional Model</li>
+  <li>Subclassing Model</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
+
+<span class="c1"># 데이터 로드 및 전처리
+</span><span class="n">mnist</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">datasets</span><span class="p">.</span><span class="n">mnist</span>
+<span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">mnist</span><span class="p">.</span><span class="n">load_data</span><span class="p">()</span>
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span> <span class="o">=</span> <span class="n">x_train</span> <span class="o">/</span> <span class="mf">255.0</span><span class="p">,</span> <span class="n">x_test</span> <span class="o">/</span> <span class="mf">255.0</span>
+</code></pre></div></div>
+
+<p>지금부터는 Tensorflow에서 제공하는 MNIST 데이터셋으로 이미지를 분류하는 다층 퍼셉트론 모델을 동일한 구조로 API만 다르게 구현해보도록 하겠습니다.</p>
+
+<h3 id="31-sequential-model">3.1 Sequential Model</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Sequential Model 설계
+</span><span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">models</span><span class="p">.</span><span class="n">Sequential</span><span class="p">([</span>
+  <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Flatten</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)),</span>
+  <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">),</span>
+  <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span>
+  <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'softmax'</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="c1"># 모델 설정 컴파일
+</span><span class="n">model</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s">'adam'</span><span class="p">,</span>
+              <span class="n">loss</span><span class="o">=</span><span class="s">'sparse_categorical_crossentropy'</span><span class="p">,</span>
+              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s">'accuracy'</span><span class="p">])</span>
+
+<span class="c1"># 모델 학습 및 평가
+</span><span class="n">model</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">test_loss</span><span class="p">,</span> <span class="n">test_acc</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span>  <span class="n">y_test</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"모델의 loss     : </span><span class="si">{</span><span class="n">test_loss</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"모델의 accuracy : </span><span class="si">{</span><span class="n">test_acc</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1875/1875 [==============================] - 4s 2ms/step - loss: 0.4746 - accuracy: 0.8621
+313/313 - 1s - loss: 0.1473 - accuracy: 0.9566
+모델의 loss     : 0.14732250571250916
+모델의 accuracy : 0.95660001039505
+</code></pre></div></div>
+
+<h3 id="32-functional-api">3.2 Functional API</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Functional 모델 설계
+</span><span class="n">inputs</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Flatten</span><span class="p">()(</span><span class="n">inputs</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'softmax'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span> <span class="o">=</span> <span class="n">outputs</span><span class="p">)</span>
+
+<span class="c1"># 모델 설정 컴파일
+</span><span class="n">model</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s">'adam'</span><span class="p">,</span>
+              <span class="n">loss</span><span class="o">=</span><span class="s">'sparse_categorical_crossentropy'</span><span class="p">,</span>
+              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s">'accuracy'</span><span class="p">])</span>
+
+<span class="c1"># 모델 학습 및 평가
+</span><span class="n">model</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">test_loss</span><span class="p">,</span> <span class="n">test_acc</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span>  <span class="n">y_test</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"모델의 loss     : </span><span class="si">{</span><span class="n">test_loss</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"모델의 accuracy : </span><span class="si">{</span><span class="n">test_acc</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1875/1875 [==============================] - 4s 2ms/step - loss: 0.4915 - accuracy: 0.8543
+313/313 - 1s - loss: 0.1515 - accuracy: 0.9537
+모델의 loss     : 0.151547372341156
+모델의 accuracy : 0.9537000060081482
+</code></pre></div></div>
+
+<h3 id="33-subclassing-api">3.3 Subclassing API</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Subclassing 모델 설계
+</span><span class="k">class</span> <span class="nc">Subclass_model</span><span class="p">(</span><span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Subclass_model</span><span class="p">,</span> <span class="bp">self</span><span class="p">).</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">flatten</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Flatten</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">dense</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s">"relu"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">out</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s">"softmax"</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">dense</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">out</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    
+<span class="n">model</span> <span class="o">=</span> <span class="n">Subclass_model</span><span class="p">()</span>
+
+<span class="c1"># 모델 설정 컴파일
+</span><span class="n">model</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s">'adam'</span><span class="p">,</span>
+              <span class="n">loss</span><span class="o">=</span><span class="s">'sparse_categorical_crossentropy'</span><span class="p">,</span>
+              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s">'accuracy'</span><span class="p">])</span>
+
+<span class="c1"># 모델 학습 및 평가
+</span><span class="n">model</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">test_loss</span><span class="p">,</span> <span class="n">test_acc</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span>  <span class="n">y_test</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"모델의 loss     : </span><span class="si">{</span><span class="n">test_loss</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"모델의 accuracy : </span><span class="si">{</span><span class="n">test_acc</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1875/1875 [==============================] - 4s 2ms/step - loss: 0.4815 - accuracy: 0.8585
+313/313 - 1s - loss: 0.1446 - accuracy: 0.9569
+모델의 loss     : 0.1445624679327011
+모델의 accuracy : 0.9569000005722046
+</code></pre></div></div>
+
+<h2 id="4-compile-fit-뜯어보기">4. compile, fit 뜯어보기</h2>
+
+<p>모델의 loss와 optimizer를 지정하고 모델의 경과를 지켜볼 수 있는 metrics를 지정해주는 <code class="language-plaintext highlighter-rouge">model.compile()</code> 함수와 입력 데이터들을 배치 단위로 나누어서 모델에 넣어주고 전체 모델의 학습 정도를 조절해주는 <code class="language-plaintext highlighter-rouge">model.fit()</code> 함수를 다른 방식으로 구현해보겠습니다.</p>
+
+<h3 id="41-modelcompile">4.1 model.compile</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s">'adam'</span><span class="p">,</span>
+              <span class="n">loss</span><span class="o">=</span><span class="s">'sparse_categorical_crossentropy'</span><span class="p">,</span>
+              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s">'accuracy'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>앞에서 반복적으로 사용한 모델의 학습 방식을 설정하는 <code class="language-plaintext highlighter-rouge">model.compile()</code>함수는 매 스텝 학습이 진행될 때 지정된 optimizer로 지정된 loss를 줄이는 과정이 자동으로 진행되어지는데 이 과정을 커스텀마이징이 가능합니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># loss function를 SparseCategoricalCrossentropy 로 미리 지정
+</span><span class="n">loss_func</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">losses</span><span class="p">.</span><span class="n">SparseCategoricalCrossentropy</span><span class="p">()</span>
+<span class="c1"># optimizer를 Adam 으로 미리 지정
+</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">keras</span><span class="p">.</span><span class="n">optimizers</span><span class="p">.</span><span class="n">Adam</span><span class="p">()</span>
+
+<span class="c1"># tf.GradientTape()를 활용한 train_step
+</span><span class="k">def</span> <span class="nf">train_step</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">):</span>
+    <span class="c1"># 1. 그래디언트 기록 시작
+</span>    <span class="k">with</span> <span class="n">tf</span><span class="p">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+        <span class="c1"># 2. model의 예측값
+</span>        <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="c1"># 3. 예측값과 실제값의 loss
+</span>        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_func</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span>
+        <span class="c1"># 4. 학습가능한 가중치별 그래디언트 추출
+</span>        <span class="n">gradients</span> <span class="o">=</span> <span class="n">tape</span><span class="p">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">model</span><span class="p">.</span><span class="n">trainable_variables</span><span class="p">)</span>
+    <span class="c1"># 5. 추출된 그래디언트 업데이트
+</span>    <span class="n">optimizer</span><span class="p">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">gradients</span><span class="p">,</span> <span class="n">model</span><span class="p">.</span><span class="n">trainable_variables</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">loss</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">model.trainable_variables</code>는 업데이트 해야하는 파라미터들을 지정해주는 역할을 합니다.</p>
+
+<h3 id="42-modelfit">4.2 model.fit</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>실제 학습이 진행되는 함수인 <code class="language-plaintext highlighter-rouge">model.fit()</code>는 단순히 데이터를 배치단위로 잘라서 앞에서 만든 학습 함수인<code class="language-plaintext highlighter-rouge">train_step</code>에 순차적으로 입력하고, 입력하여 나온 loss 와 accuracy 를 반환하는 반복문이라고 생각하면 됩니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="k">def</span> <span class="nf">train_model</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
+    <span class="c1"># 시작 시간
+</span>    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="c1"># 모델 epoch
+</span>    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">x_batch</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">y_batch</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># 모델 step
+</span>        <span class="k">for</span> <span class="n">step</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">))):</span>
+            <span class="c1"># 예제이므로 batch_size번째 데이터만 학습시킴
+</span>            <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="n">batch_size</span> <span class="o">==</span> <span class="n">batch_size</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">x_batch</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                <span class="n">y_batch</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">train_step</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">x_batch</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">float32</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_batch</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">float32</span><span class="p">))</span>
+                <span class="n">x_batch</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">y_batch</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Epoch %d: last batch loss = %.4f'</span> <span class="o">%</span> <span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">loss</span><span class="p">)))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"It took {} seconds"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+
+<span class="n">train_model</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>60000it [00:14, 4069.26it/s]
+
+Epoch 0: last batch loss = 0.0009
+It took 14.747461080551147 seconds
+</code></pre></div></div>
+
+<p>​</p>
+
+:ET
