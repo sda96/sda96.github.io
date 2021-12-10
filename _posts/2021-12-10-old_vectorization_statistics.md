@@ -75,7 +75,7 @@ use_math: true
 
 지금 부터 '나는 강아지 고양이 좋다' 라는 문서가 어떻게 생성이 되는지 알아보겠습니다.
 
-![image-20211211000256229](C:\Users\park\AppData\Roaming\Typora\typora-user-images\image-20211211000256229.png)
+![image](https://user-images.githubusercontent.com/51338268/145607925-c6b14542-832e-4105-a1ca-5316bd338d47.png)
 
 하이퍼파라미터인 $\alpha, \beta$​​​​​ 는 Dirichlet 분포를 따릅니다. 
 
@@ -117,7 +117,7 @@ $w_{d,n}$​는$z_{d,n}$​과 $\phi_{k}$에 동시에 영향 받기 때문에 �
 
 최종적으로 LDA 확률 모형이 단어를 생성하는 과정에 따라서 문서1이 가진 토픽 분포에서 토픽1을 뽑혔고, 토픽1이 가진 단어 분포에서 "나는"이라는 단어가 생성되었습니다.
 
-이 과정을 반복하면 토픽의 단어 분포에서 단어가 지속적으로 생성되어 문서를 완성하게 되며 수식으로 표현하면 다음과 같습니다.
+이 과정을 반복하면 토픽의 단어 분포에서 단어가 지속적으로 생성되어 "나는 고양이 강아지 좋다" 라는 문서를 완성하게 되며 수식으로 표현하면 다음과 같습니다.
 
 $p(\phi_{1:K}, \theta_{1:D}, z_{1:D}, w_{1:d}) = \prod_{d=i}^Dp(\theta_d \vert \alpha) \prod_{k=i}^Kp(\phi_d \vert \beta) \prod_{n=1}^Np(z_{d,n} \vert \theta_{d})p(w_{d,n} \vert z_{d,n}, \phi_k)$
 
