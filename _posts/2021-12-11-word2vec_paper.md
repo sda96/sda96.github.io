@@ -412,7 +412,7 @@ $C$ 가 가장 멀리 있는 단어들입니다. 그러므로 만약 $C = 5$ 라
 
 ### 4.4 Large Scale Parallel Training of Models
 
-![image-20211212014259700](C:\Users\park\AppData\Roaming\Typora\typora-user-images\image-20211212014259700.png)
+![image](https://user-images.githubusercontent.com/51338268/145685671-ac5c2147-fa03-4d35-9c1f-525c436b78b7.png)
 
 
 
