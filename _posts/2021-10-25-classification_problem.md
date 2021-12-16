@@ -51,7 +51,7 @@ $ LogOdds =  \log{\frac{P(y=1\vert x)}{1-P(y=1\vert x)}} = \beta_O + \sum^{p}_{j
 
   오즈에 로그를 취하는 **로짓 변환**을 함으로써 입력값의 범위가 $[0, 1]$ 일때, 출력값의 범위를 $(-\infty, \infty)$ 으로 조정해줍니다.
 
-  $LogOdds = ln\frac{P(y=1\vert x)}{1-P(y=1\vert x)}, -\infty\le Odds \le \infty$
+  $LogOdds = ln\frac{P(y=1\vert x)}{1-P(y=1\vert x)} = \beta^TX, -\infty\le Odds \le \infty$
 
 - 실제로 구해야 하는 값은 $P(y=1\vert x)$ 이기 때문에 $LogOdds$ 를 다시 정리하면 로지스틱 함수가 나오게 됩니다.
 

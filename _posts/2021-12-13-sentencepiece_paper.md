@@ -1,0 +1,38 @@
+---
+title: 예측 기반 벡터화 기법 - SentencePiece
+categories: [NLP]
+comments: true
+use_math: true
+---
+
+
+
+# [SentencePiece] SentencePiece: A simple and language independent subword tokenizer and detokenizer for Neural Text Processing Units
+
+
+
+해당 번역본은 정식 번역본이 아니며 개인이 공부를 위해서 번역한 내용으로 많은 오역, 오타가 존재합니다. 이러한 점을 감안해주시고 읽어주시면 감사하겠습니다.
+
+ 
+
+## Abstract
+
+### 3줄 요약
+
+- 해당 논문에서는 언어로부터 독립적인 서브워드 토크나이저와 신경망 기반 텍스트 처리를 위한 디토크나이저를 설계하였습니다.
+- 서브워드 분할 도구가 존재하지만, SentencePiece는 날 것의 문장을 바로 서브워드 모델로 학습시킬 수 있는, 언어에 독립적인 end-to-end 방식의 시스템입니다.
+
+
+
+## 1. Introduction
+
+### 3줄 요약
+
+- 딥러닝 기술이 NLP의 기계번역 태스크에 영향을 크게 주었지만 지금까지는 NMT 시스템은 아직 언어 종속적이고 전처리가 필요한 통계적 기계번역 시스템(SMT)을 사용해왔습니다.
+- SMT방식은 손을 많이타고 관련된 도구들은 유럽의 언어에 맞춰져 있기에 동양권(중국, 한국, 일본)은 따로 만들어야 했습니다.
+- SentencePiece는 간단하고 언어 독립적인 토크나이저로 특별한 처리없이 날 것의 문장을 바로 서브워드 분할 모델로 학습시킬 수 있는 end-to-end 시스템을 가졌으며 분할 모델은 2가지 알고리즘을 사용합니다.
+  - byte-pair-encoding
+  - uni-gram language model
+
+
+

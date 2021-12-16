@@ -54,7 +54,7 @@ print(f"Eebedding Layer 학습 파라미터 개수 : {embedd_layer.count_params(
 
     Embedding Layer 처리 전 output shape : (10, 10)
     Embedding Layer 처리 후 output shape : (10, 10, 2
-
+    
     Embedding Layer 거치기 전 : [6 5 1 6 8]
     Embedding Layer 거친 후   : 
     [[ 0.04777438 -0.00765631]
@@ -62,7 +62,7 @@ print(f"Eebedding Layer 학습 파라미터 개수 : {embedd_layer.count_params(
      [ 0.04575502 -0.01517576]
      [ 0.04777438 -0.00765631]
      [ 0.026101    0.02042036]]
-
+    
     Eebedding Layer 학습 파라미터 개수 : 200
 
 
@@ -323,22 +323,33 @@ LSTM의 구조는 위의 그림과 같으며 장기 메모리를 가지는 cell 
 cell state가 장기 메모리의 역할을 할 수 있는 이유는 과거 hidden state들에 대한 평균의 의미를 가지기 때문입니다.
 
 평균을 구하는 방식은 일반적으로는 아래의 수식과 같습니다.
-$$
-c_t = \frac{1}{N} \sum^N_{i = 1}x_i
-$$
+
+
+
+$c_t = \frac{1}{N} \sum^N_{i = 1}x_i$​
+
+
+
 하지만 평균을 구하는 또 다른 방식은 아래와 같습니다.
-$$
-\begin{matrix}
+
+
+
+$\begin{matrix}
 c_t &=& \frac{1}{N} \sum^N_{i = 1}x_i \\
 &=& \frac{N-1}{N} \frac{1}{N-1}\sum^{N-1}_{i = 1}x_i + \frac{1}{N}x_n \\
 &=& \beta c_{t-1} + (1-\beta)x_N, (0 < \beta = \frac{N-1}{N} < 1)
-\end{matrix}
-$$
+\end{matrix}$​
+
+
+
 또 다른 방식의 평균을 구하는 방식의 형태가 cell state와 닮은 것을 알 수 가 있습니다.
-$$
-a_t = \beta a_{t-1} + (1-\beta)x_N \\
-a_t = f_t * a_{t-1} + i_t * H_t
-$$
+
+
+
+$a_t = \beta a_{t-1} + (1-\beta)x_N \\
+a_t = f_t * a_{t-1} + i_t * H_t$​
+
+
 
 - $f$는 forget gate
     - $f = sigmoid(W_{hf}h_{t-1} + W_{xf}x_t)$
@@ -351,9 +362,12 @@ $$
 - $a_{t-1}$는 t-1시점의 cell state
 
 LSTM의 새로운 hidden state는 단기 메모리의 기억을 하는 역할을 가지며 식은 다음과 같습니다.
-$$
-h_t = o * tanh(a_t)
-$$
+
+
+
+$h_t = o * tanh(a_t)$​
+
+
 
 - $o$는 output gate
     - $o = sigmoid(W_{ho}h_{t-1} + W_{xo}x_t)$
