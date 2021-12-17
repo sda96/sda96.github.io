@@ -7,10 +7,6 @@ use_math: true
 
 
 
-# [SentencePiece] SentencePiece: A simple and language independent subword tokenizer and detokenizer for Neural Text Processing Units
-
-
-
 해당 내용들은 github에 정리한 내용을 글씨만 가져왔으며 머신러닝 모델 패키지인 sklearn을 사용한 코드들은 해당 [링크](https://github.com/sda96/Going_Deeper_Project/blob/main/04_New_multiclassification/02_Going_Deeper_Project_5000.ipynb)에서 보실 수 있습니다.
 
 
