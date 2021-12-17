@@ -1,6 +1,6 @@
 ---
 title: 머신러닝 모델들 간략 정리
-categories: [machinelearning]
+categories: [deeplearning]
 comments: true
 use_math: true
 ---
