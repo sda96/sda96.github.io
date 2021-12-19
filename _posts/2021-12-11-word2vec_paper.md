@@ -1,5 +1,5 @@
 ---
-title: 예측 기반 벡터화 기법 - Word2vec
+title: NLP Paper (1) - Word2vec
 categories: [NLP]
 comments: true
 use_math: true

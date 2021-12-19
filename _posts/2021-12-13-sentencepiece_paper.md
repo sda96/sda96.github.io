@@ -1,5 +1,5 @@
 ---
-title: 예측 기반 벡터화 기법 - SentencePiece
+title: NLP Paper (3) - SentencePiece
 categories: [NLP]
 comments: true
 use_math: true
