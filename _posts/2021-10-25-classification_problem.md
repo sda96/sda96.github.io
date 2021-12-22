@@ -45,21 +45,25 @@ $ LogOdds =  \log{\frac{P(y=1\vert x)}{1-P(y=1\vert x)}} = \beta_O + \sum^{p}_{j
 
 로지스틱 모형 식에서 독립변수의 범위는 $[-\infty, \infty]$ 이므로 어느 숫자이든 상관없고 종속변수의 범위는 $[0, 1]$ 사이에 있도록 만들어야 합니다.
 
-- 오즈란 성공 확률이 실패 확률에 비해서 몇 배 더 높은가를 나타내며 식으로는 아래와 같이 나타낼 수 있습니다. 
+- $Odds$란 성공 확률이 실패 확률에 비해서 몇 배 더 높은가를 나타내며 식으로는 아래와 같이 나타낼 수 있습니다. 
 
-  $Odds = \frac{P(y=1\vert x)}{1-P(y=1\vert x)}, 0 \le Odds \le 1$
+  $Odds = \frac{P(y=1\vert x)}{1-P(y=1\vert x)}, 0 \le Odds \le \infty$​
 
   오즈에 로그를 취하는 **로짓 변환**을 함으로써 입력값의 범위가 $[0, 1]$ 일때, 출력값의 범위를 $(-\infty, \infty)$ 으로 조정해줍니다.
 
-  $LogOdds = ln\frac{P(y=1\vert x)}{1-P(y=1\vert x)} = \beta^TX, -\infty\le Odds \le \infty$
+  $LogOdds = ln\frac{P(y=1\vert x)}{1-P(y=1\vert x)} = \beta^TX, -\infty\le LogOdds \le \infty$​​
 
-- 실제로 구해야 하는 값은 $P(y=1\vert x)$ 이기 때문에 $LogOdds$ 를 다시 정리하면 로지스틱 함수가 나오게 됩니다.
+- 실제로 구해야 하는 값은 $P(y=1\vert x)$​ 이기 때문에 $LogOdds$​ 를 $P(y=1 \lvert x)$에 대하여 정리하면 로지스틱 함수가 나오게 됩니다.
 
-  $P(y=1\vert x) = \frac{e^{\beta^TX}}{1 + e^{\beta^TX}}$
+  $e^{\beta^TX} = \frac{P(y=1\vert x)}{1-P(y=1\vert x)}$
 
-  해당 식을 좀 더 간결하게 표현이 가능합니다
+  $\frac{1}{e^{\beta^TX}} = \frac{1 - P(y=1\vert x)}{P(y=1\vert x)}$​​​
 
-  $P(y=1\vert x) = \frac{1}{1 + e^{-\beta^TX}}$
+  $e^{-\beta^TX} = \frac{1}{P(y=1\vert x)} -1$​
+  
+  $1 + e^{-\beta^TX} = \frac{1}{P(y=1 \lvert x)}$​​
+  
+  $P(y=1 \lvert x) = \frac{1}{1+e^{-\beta^TX}}$​
 
 ![image](https://user-images.githubusercontent.com/51338268/138713672-1fab895a-c571-4fac-9fd4-fd03d5275d2a.png)
 
