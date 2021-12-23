@@ -18,14 +18,14 @@ use_math: true
 - $U$는 $m \times m$ 직교행렬로 left singular vector 라고 부릅니다.       
 
   - ($AA^T = U(\sum\sum^T)U^T$​)
-  - $UU^T = E$
+  - $UU^T = I$​
 
 - $V$는 $n \times n$ 직교행렬로 right singular vector 라고 부릅니다.          
 
   - ($A^TA = V(\sum^T\sum)V^T$)
-  - $VV^T = E$
+  - $VV^T = I$​
 
-- $\sum$는  $AA^T, A^TA$를 고유값 분해를 해서 나오는 고유값들의 square root를 대각원소로 하는 $m \times n$ 직사각행렬로 그 대각 원소들을 행렬 $A$의 특이값(singular value)라고 부릅니다.
+- $\sum$​는  $AA^T, A^TA$​를 고유값 분해를 해서 나오는 고유값들의 제곱근을 대각원소로 하는 $m \times n$​ 직사각행렬로 그 대각 원소들을 행렬 $A$​의 특이값(singular value)라고 부릅니다.
 
   - $AA^T, A^TA$는 모두 대칭행렬이므로 위와 같은 고유값 분해가 항상 가능합니다.
   - $AA^T, A^TA$의 고유값들은 모두 0 이상(nonnegative)이며 0이 아닌 고유값들은 서로 동일합니다.
