@@ -1,5 +1,5 @@
 ---
-title: NLP Paper (4) - Bahdanau Attention
+title: NLP Paper (04) - Bahdanau Attention
 categories: [NLP]
 comments: true
 use_math: true

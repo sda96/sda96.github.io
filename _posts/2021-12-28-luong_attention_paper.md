@@ -1,5 +1,5 @@
 ---
-title: NLP Paper (6) - Luong Attention
+title: NLP Paper (06) - Luong Attention
 categories: [NLP]
 comments: true
 use_math: true

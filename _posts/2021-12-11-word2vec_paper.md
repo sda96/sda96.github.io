@@ -1,5 +1,5 @@
 ---
-title: NLP Paper (1) - Word2vec
+title: NLP Paper (01) - Word2vec
 categories: [NLP]
 comments: true
 use_math: true

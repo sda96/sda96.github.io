@@ -1,5 +1,5 @@
 ---
-title: NLP Paper (3) - SentencePiece
+title: NLP Paper (03) - SentencePiece
 categories: [NLP]
 comments: true
 use_math: true

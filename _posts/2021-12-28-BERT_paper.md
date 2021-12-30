@@ -1,5 +1,5 @@
 ---
-title: NLP Paper (9) - BERT
+title: NLP Paper (09) - BERT
 categories: [NLP]
 comments: true
 use_math: true
