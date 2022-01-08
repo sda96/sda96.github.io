@@ -19,7 +19,9 @@ use_math: true
 
 [Transformer paper link](https://arxiv.org/pdf/1706.03762.pdf)
 
- 
+ 해당 [링크](https://github.com/sda96/Going_Deeper_Project/blob/main/10_Transformer_translation/10.%20Transformer%EB%A1%9C%20%EB%B2%88%EC%97%AD%EA%B8%B0%20%EB%A7%8C%EB%93%A4%EA%B8%B0.ipynb)는 최대한 논문의 내용만을 따라가며 텐서플로우 프레임 워크를 사용하여 코드로 구현한 내용을 담고 있는 주피터 노트북입니다.
+
+
 
 [constituency parsing](https://www.analyticsvidhya.com/blog/2020/07/part-of-speechpos-tagging-dependency-parsing-and-constituency-parsing-in-nlp/) : 문장을 더 작은 서브 구절 단위로 나누어서 분석하는 방법으로 constituents 라고도 불립니다.
 

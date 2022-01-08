@@ -1,5 +1,5 @@
 ---
-title: 확률과 통계 정리 - 집합의 분할, 확률의 개념, 조건부 확률
+title: 확률과 통계 정리 - 집합의 분할, 확률의 개념
 categories: [math]
 comments: true
 use_math: true
@@ -20,9 +20,9 @@ use_math: true
     - $A_i \cap A_j = \phi$ , $(i \neq j)$, $j = 1, 2, 3, \cdots k$ 이면 $A_i$ 와 $A_j$는 서로소입니다.
     - $A_1 \cup A_2 \cup A_3 \cup \cdots \cup A_k = A$
 
-- 원소가 유한개인 집합 $A = \{a, b, c\}$​​​가 존재 할 때,
+- 원소가 유한개인 집합 $A = \\{a, b, c\\}$​​​​가 존재 할 때,
 
-  $\begin{matrix} \{a, b, c\} &=& \{a\} \cup \{b, c\} \\\ &=& \{b\} \cup \{a,c\} \\\  &=& \{c\} \cup \{a,b\} \end{matrix}$
+  $\begin{matrix} \\{a, b, c\\} &=& \\{a\\} \cup \\{b, c\\} \\\ &=& \\{b\\} \cup \\{a,c\\} \\\  &=& \\{c\\} \cup \\{a,b\\} \end{matrix}$​​
 
   로 표현이 가능합니다.
 
@@ -81,7 +81,7 @@ use_math: true
 
 - 여러 반복한 결과가 서로 영향을 주지 않는 경우를 말합니다.
 - 매시행시 일어날 확률이 $p$인 사건에서 $n$회의 시행중 $r$번 일어날 확률
-  - $P(A) = _{n}\mathrm{C}_{r}p^r(1-p)^{n-r}$
+  - $P(A) = \_{n}\mathrm{C}\_{r}p^r(1-p)^{n-r}$​
 
 #### 여사건의 확률
 
@@ -112,7 +112,7 @@ use_math: true
 #### 베이즈 정리
 
 - 사건 $B$​​에 발생하였을 때, 사건 $A$​​가 발생할 확률을 통하여 반대로 $A$가 발생하였을 때 $B$가 발생할 확률을 구할 수 있습니다.
-- $P(B \lvert A) = \frac{P(A|B) P(B)}{P(A)}$
+- $P(B \lvert A) = \frac{P(A \lvert B) P(B)}{P(A)}$​
   - $P(B \lvert A)$​​​​ 는 **사후확률**(postrior probability)로 사건 $A$​가 발생하고 갱신된 후의 사건 $B$​의 확률을 의미합니다.
   - $P(B)$​​​ 는 **사전확률**(prior probability)로 사건 $A$​​ 가 발생하기 전, 갱신되기 전의 사건 $B$​의 확률을 말합니다.
   - $P(A \lvert B)$​ 는 **가능도**(likelihood) 라고 부릅니다.

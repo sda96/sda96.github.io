@@ -1,4 +1,4 @@
-I"<h2 id="1-특이값-분해">1. 특이값 분해</h2>
+I"<h2 id="1-특이값-분해">1. 특이값 분해</h2>
 
 <ul>
   <li>
@@ -14,7 +14,7 @@
 
     <ul>
       <li>($AA^T = U(\sum\sum^T)U^T$​)</li>
-      <li>$UU^T = E$</li>
+      <li>$UU^T = I$​</li>
     </ul>
   </li>
   <li>
@@ -22,11 +22,11 @@
 
     <ul>
       <li>($A^TA = V(\sum^T\sum)V^T$)</li>
-      <li>$VV^T = E$</li>
+      <li>$VV^T = I$​</li>
     </ul>
   </li>
   <li>
-    <p>$\sum$는  $AA^T, A^TA$를 고유값 분해를 해서 나오는 고유값들의 square root를 대각원소로 하는 $m \times n$ 직사각행렬로 그 대각 원소들을 행렬 $A$의 특이값(singular value)라고 부릅니다.</p>
+    <p>$\sum$​는  $AA^T, A^TA$​를 고유값 분해를 해서 나오는 고유값들의 제곱근을 대각원소로 하는 $m \times n$​ 직사각행렬로 그 대각 원소들을 행렬 $A$​의 특이값(singular value)라고 부릅니다.</p>
 
     <ul>
       <li>$AA^T, A^TA$는 모두 대칭행렬이므로 위와 같은 고유값 분해가 항상 가능합니다.</li>
