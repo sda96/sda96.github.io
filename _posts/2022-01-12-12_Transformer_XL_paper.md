@@ -1,5 +1,5 @@
 ---
-title: NLP Paper (11) - Transformer-XL
+title: NLP Paper (12) - Transformer-XL
 categories: [NLP]
 comments: true
 use_math: true
@@ -11,7 +11,7 @@ use_math: true
 
 
 
-[**[Transformer-XL] 고정 길이 문맥을 넘어서는 어텐션 기반 언어 모델 **](https://arxiv.org/abs/1901.02860)
+[**[Transformer-XL] 고정 길이 문맥을 넘어서는 어텐션 기반 언어 모델**](https://arxiv.org/abs/1901.02860)
 
 
 
