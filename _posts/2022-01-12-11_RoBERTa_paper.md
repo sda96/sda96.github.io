@@ -11,7 +11,7 @@ use_math: true
 
 
 
-[**[RoBERTa] 강건하게 최적화된 BERT를 사전학습시키는 접근법 **](https://arxiv.org/abs/1907.11692)
+[**[RoBERTa] 강건하게 최적화된 BERT를 사전학습시키는 접근법**](https://arxiv.org/abs/1907.11692)
 
 
 

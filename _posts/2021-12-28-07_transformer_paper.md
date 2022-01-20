@@ -78,6 +78,14 @@ use_math: true
 - Decoder layer도 똑같이 6개를 사용했으며 Encoder layer와 유사하지만 사용된 Attention layer의 종류가 2가지입니다.
   - Masked Multi-Head-Attention layer
     - 다음으로 오는 위치값을 보존하기 위해서 일부러 마스킹시키는 변형된 self attention layer 입니다.
+    
+    - self-attention에 Masking 함으로써, i 번째 위치의 단어를 예측할 때, i보다 작은 위치의 단어들만 참고하여 예측할 수 있도록 만들어 줍니다.
+    
+      | self-attention | 나는 | 배가       | 고프다     |
+      | :------------: | ---- | ---------- | ---------- |
+      |      나는      | 1    | -1e9[Mask] | -1e9[Mask] |
+      |      배가      | 0.8  | 1          | -1e9[Mask] |
+      |     고프다     | 0.2  | 0.3        | 1          |
   - Multi-Head-Attention layer
 
 

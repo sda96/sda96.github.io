@@ -1,0 +1,162 @@
+---
+title: Github branch 사용법
+categories: [github]
+comments: true
+use_math: true
+---
+
+
+
+## 1. Main-branch를 clone 합니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150282794-9aeaae68-5ef5-4f0f-890c-05b871cf1dee.png)
+
+현재 디렉토리에 존재하는 파일을 확인하기 위해서 ```ls``` 명령어를 사용합니다.
+
+현재 ```ls``` 명령어를 사용하면 aiffel이라는 이름의 폴더 밖에 존재하지 않습니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150286708-e0cfe270-77a6-4c1f-843a-4e6c060e9b50.png)
+
+위 그림에서 노란색 부분의 링크를 복사하여 Main branch의 링크를 가져옵니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150282921-123505f9-6339-428d-bad0-5d1beb32f4d8.png)
+
+```git clone [repository url]```
+
+명령어를 사용하면 위의 그림과 같이 Cloning이 진행되어서 현재 디렉토리에 해당 주소에 맞는 repository를 가져오게 됩니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150283161-43957796-8848-419c-bbdc-560b05fcf3f3.png)
+
+Cloning이 완료된 다음 현재 디렉토리에 존재하는 파일을 확인하는 명령어인 ```ls```를 사용하면 그림과 같이 PythonCodingDojang이라는 폴더가 생성되었습니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150283717-d627587d-06bb-440c-9754-b149c3f66203.png)
+
+다음 작업을 위해서 PythonCodingDojang 폴더로 이동합니다.
+
+
+
+## 2. Sub-branch를 생성합니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150283815-d9d31c81-1dbe-4a40-89c9-cd29e47526f2.png)
+
+```git branch``` 명령어로 현재 존재하는 branch를 확인하며 확인결과 master branch 하나만 존재하고 있다는 것을 알 수 가 있습니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150284215-adc211ca-12bd-436d-82c5-754d2c7fbe11.png)
+
+```git checkout -b [새로운 branch 이름]``` 명령어를 사용하여 새로운 이름의 branch인 example branch를 만든 뒤 master branch에서 example branch로 이동합니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150284488-9e3e430b-1623-4c28-ae21-5a1a1dadeb84.png)
+
+```git checkout [branch 이름]``` 명령어로 branch를 이동할 수 있습니다.
+
+
+
+## 3. Sub-branch에서 작업을 진행합니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150284971-c56f42a9-4e60-49b5-ae60-de18017b6972.png)
+
+현재 branch에 example인 상태에서 작업을 진행합니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150285137-87b02e31-86fb-49ca-b6ef-c0040aaee144.png)
+
+작업의 예시로 위 그림과 같은 jupyter notebook을 작성합니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150285287-efe7f006-9b55-4474-8c39-152f7fe28abd.png)
+
+새롭게 작성된 jupyter notebook이 있는 것을 확인할 수 있었습니다.
+
+
+
+## 4. Sub-branch에 push를 합니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150285525-9f31bf9b-cdfb-4116-b9d2-ef2041804852.png)
+
+```git add .``` 명령어를 통하여 현재 경로에 있는 모든 파일들을 staged 시킵니다.
+
+```git commit -m ["commit 내용"]``` 명령어를 통하여 Git에 업데이트 시킵니다.
+
+```git push origin [현재 작업중인 branch 명]``` 지금 같은 경우 example이라는 이름의 branch에서 작업중이므로 example branch에 commit한 내용을 push 시킵니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150286026-506ef305-a3e6-4481-80cd-7830c1df35c7.png)
+
+무사히 push가 완료되면 위 그림과 같이 작업 내용이 생성되며 지금의 경우 github에는 example이라는 branch가 존재하지 않았기 때문에 새로 만든다는 내용도 포함되어 있습니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150286487-7b810259-ba13-45ce-9c16-b8a96f0611c8.png)
+
+github에서는 그림과 같이 example이라는 새로운 branch가 생성되었으며 이를 compare & pull request 할거냐고 물어보게 됩니다.
+
+
+
+## 5. push가 완료되면 Main-branch에 pull request를 요청합니다.
+
+앞선 그림에서 Compare & pull request 버튼을 누르면 아래와 같은 화면으로 이동하게 됩니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150287049-bfc8f52b-da0d-42aa-839d-c43fb8fe5286.png)
+
+위 그림과 같이 main, master branch에 병합시켜달라는 pull request 요청에 변경된 내용, 반영된 사항등의 변경 사항등을 적어서 초록색의 Create pull request 버튼을 눌러줍니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150287479-4282f25d-3348-43b4-a8c6-d539c871efe9.png)
+
+만일 Merge를 요청한 example branch가 main, master branch와 충돌을 일으키지 않고 안정하게 합쳐진다고 github 내부적으로 판단하였을 때, 그림과 같이 초록색으로 This branch has no conflicts with the base branch 가 뜨게 됩니다.
+
+
+
+## 6. Main-branch 관리자는 pull request 내용을 리뷰합니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150287922-faafbaf6-4f1d-40f7-b924-e1b57ff1cdf7.png)
+
+main, master branch 관리자는 바뀐 내용들을 리뷰합니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150288109-21bb6133-4580-4f24-8c14-13cd659163b9.png)
+
+바뀐 내용들을 모두 리뷰하면 그림과 같이 확인합니다.
+
+
+
+## 7. 리뷰가 완료되면 Sub-branch를 Main-branch에 Merge 시킵니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150288273-f5670790-204f-482b-bf62-bb1d6687dd00.png)
+
+main, master 관리자가 리뷰도 마치면 최종적으로 example branch와 master branch를 merge(병합)시키기 위해서 Merge pull request 버튼을 누릅니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150288444-1de812f6-27d6-40b4-b736-3ebd5a71c6cc.png)
+
+최종적으로 Merge시키는 관리자가 어떠한 내용을 merge시키는지 내용을 적고 Confirm merge 버튼을 누릅니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150288604-d9ed4c07-d7c4-44f7-878e-1b00563b1c5e.png)
+
+최종적으로 merge가 완료된 pull request는 그림과 같이 바뀌게 됩니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150288775-3c7e737c-e276-4d53-91af-35cf3a668456.png)
+
+merge가 완료되면 master branch에서 보지 못했던 New_File_Example.ipynb 파일이 master branch에 존재하는 것을 확인 할 수 있습니다.
+
+
+
+## 8. Merge가 완료된 Sub-branch는 삭제를 해줍니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150288967-f2097b46-6c60-43a9-9633-6602aab532f5.png)
+
+master branch에 merge가 완료된 example branch는 더 이상 사용하지 않기 때문에 제거해주어야 합니다.
+
+위의 그림에서 노란색으로 표시 View all branches 버튼을 눌러서 현재 존재하는 branch들을 확인해줍니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150289188-ebfd59c8-560c-499d-ad3b-a75384cb3d65.png)
+
+merge가 완료된 example branch는 merged라는 마크가 생기면서 빨강색 쓰레기통 아이콘을 클릭하여 example branch를 github에서 삭제시켜 줍니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150289338-a7818529-db24-4ac2-a2dd-6683de8f3ffe.png)
+
+삭제 버튼을 누르면 그림과 같이 처리가 됩니다. 
+
+하지만 지금 위의 과정은 아직 github에 존재하는 example branch를 제거하는 방법이기 때문에 사용자가 사용했던 작업환경에서는 아직 example branch가 존재합니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150284701-ba334b47-19d6-4dd6-87b3-f8e275040654.png)
+
+```git branch -d [branch 이름]``` 명령어로 원하는 이름의 branch를 제거할 수 있지만 default branch인 main, master branch는 제거할 수 없습니다.
+
+그리고 example branch를 제거하려면 다른 branch로 이동한 다음에 시도해야지 제거가 가능합니다. 만일 그렇지 않은 경우 아래와 같은 error가 발생합니다.
+
+![image](https://user-images.githubusercontent.com/51338268/150290096-d7ca3f66-3593-430f-b01a-934448493af2.png)
+
+이 명령어를 사용하여 example branch를 제거하면 branch가 사용되는 일련의 과정이 마무리되게 됩니다.
