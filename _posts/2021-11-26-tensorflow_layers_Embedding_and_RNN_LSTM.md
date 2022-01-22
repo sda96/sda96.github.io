@@ -334,13 +334,13 @@ $c_t = \frac{1}{N} \sum^N_{i = 1}x_i$​
 
 
 
-$\begin{matrix}
-c_t &=& \frac{1}{N} \sum^N_{i = 1}x_i \\\
-&=& \frac{N-1}{N} \frac{1}{N-1}\sum^{N-1}_{i = 1}x_i + \frac{1}{N}x_n \\\
-&=& \beta c_{t-1} + (1-\beta)x_N, (0 < \beta = \frac{N-1}{N} < 1)
-\end{matrix}$​​
+$
+c_{t} = \frac{1}{N} \sum^{N}_{i = 1}{x_i} 
+$​​​​​
 
+$c_t = \frac{N-1}{N} \frac{1}{N-1} \sum^{N-1}_{i = 1}x_i  + \frac{1}{N}{x_n}$
 
+$c_t = \beta c_{t-1} + (1 - \beta)x_{N}, (0 < \beta = \frac{N-1}{N} < 1)$
 
 또 다른 방식의 평균을 구하는 방식의 형태가 cell state와 닮은 것을 알 수가 있습니다.
 

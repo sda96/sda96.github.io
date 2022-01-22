@@ -1,0 +1,242 @@
+I"�.<h1 id="transformer-attention-is-all-you-need">[Transformer] Attention Is All You Need</h1>
+
+<p><strong>[Transformer] Attention은 당신이 필요한 모든 것이다!</strong></p>
+
+<p>해당 번역본은 정식 번역본이 아니며 개인이 공부를 위해서 번역한 내용으로 많은 오역, 오타가 존재합니다. 이러한 점을 감안해주시고 읽어주시면 감사하겠으며 논문의 링크도 남깁니다.</p>
+
+<p><a href="https://arxiv.org/pdf/1706.03762.pdf">Transformer paper link</a></p>
+
+<p>해당 <a href="https://github.com/sda96/Going_Deeper_Project/blob/main/10_Transformer_translation/10.%20Transformer%EB%A1%9C%20%EB%B2%88%EC%97%AD%EA%B8%B0%20%EB%A7%8C%EB%93%A4%EA%B8%B0.ipynb">링크</a>는 최대한 논문의 내용만을 따라가며 텐서플로우 프레임 워크를 사용하여 코드로 구현한 내용을 담고 있는 주피터 노트북입니다.</p>
+
+<p><a href="https://www.analyticsvidhya.com/blog/2020/07/part-of-speechpos-tagging-dependency-parsing-and-constituency-parsing-in-nlp/">constituency parsing</a> : 문장을 더 작은 서브 구절 단위로 나누어서 분석하는 방법으로 constituents 라고도 불립니다.</p>
+
+<h2 id="abstract">Abstract</h2>
+
+<ul>
+  <li>주요한 시퀀스 번역 모델들은 복잡한 RNN, CNN기반의 인코더 디코더 형태의 신경망 네트워크였습니다.</li>
+  <li>해당 논문에서 새롭고 간단한 구조를 소개하며 그 이름은 ‘Transformer’입니다. <strong>‘Transformer’는 RNN, CNN을 배제한 오직 ‘Attention’구조를 활용 하였습니다.</strong></li>
+  <li>해당 방식의 번역 품질은 더 뛰어났고, 더욱 <strong>병렬화가 쉬웠으며</strong>, 학습에 필요한 시간이 훨씬 적었습니다.</li>
+  <li>‘Transformer’구조는 영어 서브워드 구문분석에서도 크고, 제한된 훈련 데이터의 양에서도 성공적으로 적용되어져서 다른 태스크에서도 잘 일반화되어집니다.</li>
+</ul>
+
+<h3 id="1-introduction">1. Introduction</h3>
+
+<ul>
+  <li>언어모델과 기계번역 분야에서 RNN 기반의 다양한 모델들이 다양한 모습으로 발전해왔습니다.</li>
+  <li>RNN 기반의 모델들은 일반적으로 입력 시퀀스와 출력 시퀀스의 단어들 위치에 따라서 계산 비용에 영향을 끼칩니다.</li>
+  <li>이러한 본질적인 시퀀스 환경은 예시들에 따라서 한정된 메모리 제약을 넘어서는 길이의 시퀀스와 같은 훈련 예시들의 병렬화를 배재했습니다.</li>
+  <li>
+    <p>최근까지도 성능의 향상과 계산 효율성이 증가한 모델이 개발되어오고 있지만 시퀀스 연산에 대한 기본적인 제약이 여전히 남아있었습니다.</p>
+  </li>
+  <li>해당 논문에서는 Transformer를 제안하며, 이 모델의 구조는 재귀성을 피하였고, 대신에 <strong>입력과 출력사이의 전체적인 종속성을 만드는데 ‘Attention’ 구조에 전적으로 의존합니다.</strong></li>
+</ul>
+
+<h3 id="2-background">2. Background</h3>
+
+<ul>
+  <li>해당 논문에서 시퀀스 연산을 감소키는 것이 다음과 같은 방법을 적용하였습니다.</li>
+  <li><strong>위치에 따른 가중치를 적용한 Attention을 평균화</strong>시키는 방법으로 이 방법은 <strong>Multi-Head Attention</strong> 효과와 대응합니다. 동일합니다.</li>
+  <li><strong>Self-Attention</strong>은 내부 Attention이라고도 부르며 <strong>시퀀스 표현을 계산하기 위한 하나의 시퀀스</strong>로 서로 다른 위치들과 관련된 Attention 구조입니다.</li>
+</ul>
+
+<h3 id="3-model-architecture">3. Model Architecture</h3>
+
+<p><img src="https://user-images.githubusercontent.com/51338268/147523979-9fa2a119-ad8a-4322-9ecb-2fa829030843.png" alt="image" /></p>
+
+<ul>
+  <li>Transformer는 기본적으로 Encoder-Decoder 구조를 이루며 과거에는 RNN, LSTM이 적용되던 부분을 Multi-Head Attention으로 바꾼 형태입니다.</li>
+</ul>
+
+<h4 id="31-encoder-and-decoder-stacks">3.1 Encoder and Decoder Stacks</h4>
+
+<p><strong>Encoder</strong></p>
+
+<ul>
+  <li>Encoder layer를 해당 논문에서는 6개를 사용하였으며 Encoder layer를 구성하는 sub-layer는 다음과 같이 구성되어 있습니다.
+    <ul>
+      <li>Multi-Head-Attention layer</li>
+      <li>Postion wise fully connected feed forward layer</li>
+    </ul>
+  </li>
+  <li>각 sub-layer에는 residual connection과 layer normalization을 적용하였습니다.
+    <ul>
+      <li>residual connection을 각 sub-layer에 적용하기 때문에 임베딩의 크기와 동일한 차원으로 유닛수를 유지해주었으며 논문에서는 512로 지정해주었습니다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Decoder</strong></p>
+
+<ul>
+  <li>Decoder layer도 똑같이 6개를 사용했으며 Encoder layer와 유사하지만 사용된 Attention layer의 종류가 2가지입니다.
+    <ul>
+      <li>Masked Multi-Head-Attention layer
+        <ul>
+          <li>
+            <p>다음으로 오는 위치값을 보존하기 위해서 일부러 마스킹시키는 변형된 self attention layer 입니다.</p>
+          </li>
+          <li>
+            <p>self-attention에 Masking 함으로써, i 번째 위치의 단어를 예측할 때, i보다 작은 위치의 단어들만 참고하여 예측할 수 있도록 만들어 줍니다.</p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th style="text-align: center">self-attention</th>
+                  <th>나는</th>
+                  <th>배가</th>
+                  <th>고프다</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="text-align: center">나는</td>
+                  <td>1</td>
+                  <td>-1e9[Mask]</td>
+                  <td>-1e9[Mask]</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center">배가</td>
+                  <td>0.8</td>
+                  <td>1</td>
+                  <td>-1e9[Mask]</td>
+                </tr>
+                <tr>
+                  <td style="text-align: center">고프다</td>
+                  <td>0.2</td>
+                  <td>0.3</td>
+                  <td>1</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+        </ul>
+      </li>
+      <li>Multi-Head-Attention layer</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="32-attention">3.2 Attention</h4>
+
+<ul>
+  <li>Attention 함수는 query와 한 쌍의 key-value를 출력과 맵핑함으로써 입력을 설명해주는 함수입니다.</li>
+</ul>
+
+<p><strong>Scaled Dot-Product Attention</strong></p>
+
+<p><img src="https://user-images.githubusercontent.com/51338268/147730815-f130e9ba-f8fb-4611-a991-2c3da618f15f.png" alt="image" /></p>
+
+<ul>
+  <li>Attention 연산에는 곱 연산(Dot-product attention)과 합 연산(Additive attention)이 존재하지만 곱 연산 방식이 더 빠르며 합 연산의 경우에는 layer normalization에서 사용되어 집니다.</li>
+  <li>$Attention(Q,K,V) = softmax(\frac{QK^T}{\sqrt{d_k}})V$
+    <ul>
+      <li>$Q$ : query matrix</li>
+      <li>$K$ : key matrix</li>
+      <li>$V$ : value matrix</li>
+      <li>$d_k$​ : query와 key의 차원의 수</li>
+    </ul>
+  </li>
+  <li>$\sqrt{d_k}$로 나누어 주었기 때문에 scaled 라고 부르며 scaling을 시킨 이유는 곱 연산으로 너무 커지는 값을 소프트맥스 함수가 작은 미분값을 부여하기 때문에 이를 조정해주기 위해서 처리되었습니다.</li>
+</ul>
+
+<p><strong>Multi-Head Attention</strong></p>
+
+<p><img src="https://user-images.githubusercontent.com/51338268/147731475-4f567d8b-0caf-4f7a-8855-6372b4d002a2.png" alt="image" /></p>
+
+<ul>
+  <li>
+    <p>Multi Head Attention은 동일한 차원의 크기를 가진 query와 key의 차원을 h등분 시켜주며 각각 h등분된 query와 key는 선형결합을 시킨 뒤 다시 concat 시키고 다시 선형결합을 시킨 구조입니다.</p>
+  </li>
+  <li>
+    <p>해당 논문에서는 8등분을 시켰으며 이 함수 덕분에 Attention은 병렬화가 가능해졌습니다.</p>
+  </li>
+  <li>
+    <p>$Multihead(Q,K,V) = Concat(head_1, \cdots, head_h)W^O$​</p>
+
+    <p>$head_i = Attetnion(QW^Q_i, KW^K_i, VW^V_i)$</p>
+  </li>
+</ul>
+
+<p><strong>Applications of Attention in ourt Model</strong></p>
+
+<ul>
+  <li>Decoder부분에 있는 Encoder의 내용과 Decoder의 내용을 받는 Multi-head Attention은 key와 value를 Encoder에서 받으며 query는 Decoder에서 입력 받습니다.</li>
+  <li>Encoder의 Multi-head Attention은 기본적으로 self-attention으로 자기 자신한테서 query, key, value를 가져오게 됩니다.</li>
+  <li>Decoder의 Masked-Multi-head Attention는 입력값들의 위치 정보에 대한 순서를 학습하기 위해서 마스킹을 적용합니다.</li>
+</ul>
+
+<h4 id="33-position-wise-feed-forward-networks">3.3 Position-wise Feed-Forward Networks</h4>
+
+<ul>
+  <li>attention sub layer의 경우 활성화 함수가 적용된 적이 없기 때문에 해당 sub-layer에서 활성화 함수인 ReLU를 적용하여 비선형성을 부여해줍니다.</li>
+  <li>$FFN(x) = \max(0, xW_1 +b_1)W_2 + b_2$​</li>
+</ul>
+
+<h4 id="34-embedding-and-softmax">3.4 Embedding and Softmax</h4>
+
+<ul>
+  <li>사전학습된 임베딩 벡터를 사용하며 모델이 vocab_size의 차원중에서 가장 높은 확률을 가진 단어를 도출하기 위한 softmax를 출력층에 적용합니다.</li>
+</ul>
+
+<h4 id="35-postional-encoding">3.5 Postional Encoding</h4>
+
+<ul>
+  <li>
+    <p>RNN, CNN모델을 배재하면서 시퀀스 데이터의 연속성, 재귀성을 사용하지 못하게 되면서 입력 데이터의 순서를 알기 어려워졌습니다.</p>
+  </li>
+  <li>
+    <p>입력 데이터의 순서를 부여하기 위한 방법으로 Postional Encoding 입력 데이터에 더해주는 방법을 제안합니다.</p>
+  </li>
+  <li>
+    <p>$PE_{(pos, 2i)} = \sin(pos/1000^{2i/d_model})$</p>
+
+    <p>$PE_{(pos, 2i+1)} = \cos(pos/1000^{2i/d_model})$​</p>
+  </li>
+</ul>
+
+<h3 id="4-why-self-attention">4. Why Self-Attention</h3>
+
+<ul>
+  <li>
+    <p>CNN, RNN layer를 배재하고 Self Attention을 활용하는 이유는 다음과 같습니다.</p>
+
+    <ul>
+      <li>
+        <p>각 층마다의 계산 복잡도가 비교적 감소하였습니다.</p>
+      </li>
+      <li>
+        <p>막대한 양의 계산을 병렬화시킬 수 있습니다.</p>
+      </li>
+      <li>
+        <p>네트워크에서 문장의 길이에 대한 종속성을 통과시켜줍니다.</p>
+      </li>
+      <li>
+        <p>추가적으로 Self Attention은 해석에 용이한 모델을 제공해줄 수 있습니다.</p>
+
+        <p><img src="https://user-images.githubusercontent.com/51338268/147733042-2abcad9c-6919-4370-9b42-0b7027d66869.png" alt="image" /></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="5-training">5. Training</h3>
+
+<ul>
+  <li>Transformer 모델의 성능을 검증하기 위해서 standard WMT 2014 EN-GE 데이터셋과 EN-FR 데이터셋을 사용하여 성능을 비교해보았습니다.
+    <ul>
+      <li>sentence encoding : byte-pair encoding, word-piece</li>
+      <li>hardware : 8개의 NVIDA P100 GPU, 12시간, 100,000 steps</li>
+      <li>optimizer : Adam</li>
+      <li>lr $ = d^{-0.5}_{model}\cdot\min(step_num^{-0.5}, step_num\cdot warmup_steps^{-1.5})$​​</li>
+      <li>regularization
+        <ul>
+          <li>dropout : 모든 sub-layer가 연산하기 전에 적용한 rate는 0.1</li>
+          <li><a href="https://3months.tistory.com/465">label smoothing</a></li>
+          <li><a href="https://blog.naver.com/PostView.nhn?blogId=sooftware&amp;logNo=221809101199&amp;from=search&amp;redirect=Log&amp;widgetTypeCall=true&amp;directAccess=false">beam search (Machine Translation)</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+:ET
