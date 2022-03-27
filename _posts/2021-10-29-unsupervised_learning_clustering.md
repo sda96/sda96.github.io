@@ -1,6 +1,6 @@
 ---
 title: 비지도 학습 (1) 군집화
-categories: [deeplearning]
+categories: [machinelearning]
 comments: true
 ---
 
