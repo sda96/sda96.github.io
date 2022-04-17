@@ -55,17 +55,17 @@ It consists of a **segment-level recurrence mechanism** and a **novel positional
 
     어떻게 하면 state를 재사용할 때, 위치 정보의 일관성을 유지시킬 수 있을까?
 
-    ![image-20220417141850692](C:\Users\park\AppData\Roaming\Typora\typora-user-images\image-20220417141850692.png)
+    ![image](https://user-images.githubusercontent.com/51338268/163702452-bf61909b-2079-473c-922c-7349fbf1bc7d.png)
 
     기본 Transformer의 attention score를 구하는 방식은 query와 key를 내적한 형태로 위의 식에서 E_{x_i}는 i번째 워드 임베딩 벡터이고 U_i는 Positional Encoding을 의미합니다.
 
     해당 식은 전개하면 아래와 같은 식이 나옵니다.
 
-    ![image-20220417141904515](C:\Users\park\AppData\Roaming\Typora\typora-user-images\image-20220417141904515.png)
+    ![image](https://user-images.githubusercontent.com/51338268/163702478-6c6fda2f-d522-4116-a017-922b3f9322af.png)
 
     Transformer-XL의 경우 다음과 같이 변합니다.
 
-    ![image-20220417141926086](C:\Users\park\AppData\Roaming\Typora\typora-user-images\image-20220417141926086.png)
+    ![image](https://user-images.githubusercontent.com/51338268/163702484-c0629218-f482-426a-b043-68cee21c9b8f.png)
 
   - The first change we make is to **replace all appearances of the absolute positional embedding $U_j$ for computing key vectors in term (b) and (d) with its relative counterpart $R_{i−j}$** . This essentially reflects the prior that only the relative distance matters for where to attend. Note that R is a sinusoid encoding matrix (Vaswani et al.,2017) without learnable parameters.
 
@@ -77,7 +77,7 @@ It consists of a **segment-level recurrence mechanism** and a **novel positional
 
     **이 경우 query vector는 모든 query position에 대해서 같기 때문에,** 다른 단어로 향하는 attentive bias들은 query position과 동일한 것을 남길 수 있습니다. 이와 같은 이유로 (d)에 있는 $U^T_i W^T_q$도 $v$로 대체시킵니다.
 
-    ![image-20220417141946607](C:\Users\park\AppData\Roaming\Typora\typora-user-images\image-20220417141946607.png)
+    ![image](https://user-images.githubusercontent.com/51338268/163702499-93d8c880-aca5-48aa-9a61-56093e23e19b.png)
 
   - Finally, we deliberately separate the two weight matrices $W_{k.E}$ and $W_{k.R}$ for producing the content-based key vectors and location-based key vectors respectively.
 
