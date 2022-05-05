@@ -1,5 +1,5 @@
 ---
-title: Probability Likelihood MAP
+title: Probability Likelihood MLE
 categories: [math]
 comments: true
 use_math: true
@@ -19,7 +19,7 @@ use_math: true
 
 확률분포에서는 조건에 해당하는 면적을 확률이라고 부릅니다.
 
-![Untitled](C:\Users\park\Desktop\NLP_papers\cs4780\Export-4c392833-7eaf-4b58-b4ba-2d9a5f5f8204\Probability Likelihood MAP 5665b3d04f7143ddb8f821c18dc7e3b4\Untitled.png)
+![image](https://user-images.githubusercontent.com/51338268/166993733-cd6ede5f-4e79-4edf-b1b6-db7e668641d3.png)
 
 예를 들어 평균이 32이고 분산이 2.5인 정규분포가 주어졌을 때, 32-34사이로 관측될 확률은 그림의 빨간 영역입니다. 
 
@@ -31,7 +31,7 @@ use_math: true
 
 가능도 = L(확률분포 D | 관측값 X)
 
-![Untitled](C:\Users\park\Desktop\NLP_papers\cs4780\Export-4c392833-7eaf-4b58-b4ba-2d9a5f5f8204\Probability Likelihood MAP 5665b3d04f7143ddb8f821c18dc7e3b4\Untitled 1.png)
+![image](https://user-images.githubusercontent.com/51338268/166993947-dfd96c6d-92f5-4d20-a80e-281f936a6ece.png)
 
 관측값이 34일 때, 그림의 정규분포에서 해당 관측값이 나왔을 확률은 0.12라고 볼 수 있습니다.
 
@@ -43,11 +43,11 @@ use_math: true
 
 “최대 우도 추정법”은 각 관측값에 대한 총 가능도(모든 가능도의 곱)가 최대가 되게하는 분포를 찾는 모수 추정법입니다.
 
-![Untitled](C:\Users\park\Desktop\NLP_papers\cs4780\Export-4c392833-7eaf-4b58-b4ba-2d9a5f5f8204\Probability Likelihood MAP 5665b3d04f7143ddb8f821c18dc7e3b4\Untitled 2.png)
+![image](https://user-images.githubusercontent.com/51338268/166994125-3d020b4b-58fb-4c60-b66f-5a8684df02b1.png)
 
 첫 번째 그림은 좌측 끝에 정규분포를 가지는 확률분포의 경우 각 관측값들의 가능도를 구하고 모두 곱하여 나온 총 자유도를 나타는데 수치가 상당히 작습니다.
 
-![Untitled](C:\Users\park\Desktop\NLP_papers\cs4780\Export-4c392833-7eaf-4b58-b4ba-2d9a5f5f8204\Probability Likelihood MAP 5665b3d04f7143ddb8f821c18dc7e3b4\Untitled 3.png)
+![image](https://user-images.githubusercontent.com/51338268/166994244-30d4c390-d726-4ed1-b0e6-f13a2a3cdb2e.png)
 
 두 번째 그림은 확률분포를 옮겨가며 총 자유도를 구한 결과를 나타내며 이중에서 **총 자유도가 가장 크게 나온 확률분포가 모집단의 확률분포와 가장 가깝다고 볼 수 있습니다.**
 
@@ -58,5 +58,3 @@ use_math: true
 - [확률(probability)과 가능도(likelihood) 그리고 최대우도추정(likelihood maximization)](https://jjangjjong.tistory.com/41)
 
 - [Maximum Likelihood, clearly explained!!!](https://www.youtube.com/watch?v=XepXtl9YKwc&list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9&index=40)
-
-### 
